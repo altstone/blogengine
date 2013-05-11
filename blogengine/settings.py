@@ -9,13 +9,28 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {  # TODO: local MySQL support
-    'default': {
-        'ENGINE': 'google.appengine.ext.django.backends.rdbms',
-        'INSTANCE': 'alexborisov.info:altstone:blogengine',
-        'NAME': 'sampleblog',
+import os
+if (os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine') or
+    os.getenv('SETTINGS_MODE') == 'prod'):
+    # Running on production App Engine, so use a Google Cloud SQL database.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'google.appengine.ext.django.backends.rdbms',
+            'INSTANCE': 'alexborisov.info:altstone:blogengine',
+            'NAME': 'sampleblog',
+        }
     }
-}
+else:
+    # Running in development, so use a local MySQL database.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'USER': 'sampleblog',
+            'PASSWORD': 'DArz5B58cTKsqHRm',
+            'HOST': 'localhost',
+            'NAME': 'sampleblog',
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -116,7 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'sampleblog',

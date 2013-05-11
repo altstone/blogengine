@@ -1,0 +1,14 @@
+{% extends "sampleblog/base.html" %}
+
+{% block title %}{{ post.title }} - Confirm Delete Post{% endblock %}
+
+{% block content %}
+<h2>Confirm Delete Post</h2>
+<p class="post-date">{{ post.date_published }}</p>
+<h3>{{ post.title }}</h3>
+<div class="post-entry">{{ post.contents|linebreaks|truncatewords_html:100 }}</div>
+<form method="post">
+    {% csrf_token %}
+    <p><input type="submit" value="Delete" class="btn btn-danger" /> or <a href="{% url post_detail post.pk %}" class="btn">Cancel</a></p>
+</form>
+{% endblock %}

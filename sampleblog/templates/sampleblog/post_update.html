@@ -1,0 +1,14 @@
+{% extends "sampleblog/base.html" %}
+
+{% block title %}{{ post.title }} - Edit Post{% endblock %}
+
+{% block content %}
+<h2>Edit Post</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Publish" class="btn btn-primary" /> or 
+    <a href="{% url post_detail post.pk %}" class="btn">Cancel</a> or 
+    <a href="{% url post_delete post.pk %}" class="btn btn-danger">Delete</a></p>
+</form>
+{% endblock %}
