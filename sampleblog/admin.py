@@ -12,11 +12,3 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-
-# TODO: проверить работу на гае
-# TODO: нагенерить контент на гае
-
-# TODO: readme.rd
-# TODO: залить на гитхаб
-# TODO: залить doorscenter на гитхаб
-# TODO: написать письмо

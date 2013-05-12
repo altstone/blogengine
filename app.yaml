@@ -13,3 +13,7 @@ builtins:
 
 env_variables:
   DJANGO_SETTINGS_MODULE: 'blogengine.settings'
+
+handlers:
+- url: /static
+  static_dir: sampleblog/static
